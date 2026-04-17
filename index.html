@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shyam Bastyralaya | Elegant Clothing</title>
+    <!-- Google Fonts -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    
+    <style>
+        :root {
+            --terracotta: #C06C4C;
+            --dusty-pink: #D4A5A5;
+            --mushroom-light: #E5D3C5;
+            --mushroom-deep: #8C7573;
+            --text-main: #3E3636;
+            --white-glass: rgba(255, 255, 255, 0.7);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--mushroom-light);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .brand-logo {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            background: var(--white-glass);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .brand-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--terracotta);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--terracotta);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+                        url('https://unsplash.com') center/cover no-repeat;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.3s forwards;
+        }
+
+        .cta-btn {
+            padding: 15px 40px;
+            background: var(--terracotta);
+            color: white;
+            border: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            animation: fadeInUp 1s 0.6s forwards;
+        }
+
+        .cta-btn:hover {
+            background: var(--mushroom-deep);
+            transform: scale(1.05);
+        }
+
+        /* --- Collection Section --- */
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--terracotta);
+        }
+
+        .section-title .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--dusty-pink);
+            margin: 15px auto;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .quick-view {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--white-glass);
+            padding: 10px 25px;
+            opacity: 0;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .product-card:hover .quick-view {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* --- About Section --- */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            height: 500px;
+            background: url('https://unsplash.com') center/cover;
+            border-radius: 4px;
+        }
+
+        /* --- Contact Form --- */
+        .contact-flex {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--dusty-pink);
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: var(--mushroom-light);
+            font-family: inherit;
+        }
+
+        .submit-btn {
+            background: var(--terracotta);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            width: 100%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--mushroom-deep);
+            color: var(--mushroom-light);
+            padding: 60px 10% 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--terracotta);
+            transform: translateY(-5px);
+        }
+
+        /* --- Animations & Utilities --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 1s all ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Simplification for example; JS handles mobile menu */
+            }
+            .hamburger { display: block; }
+            .hero-content h1 { font-size: 2.5rem; }
+            section { padding: 60px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="brand-logo">Shyam Bastyralaya</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#collection">Collection</a>
+            <a href="#about">Our Story</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Timeless Elegance</h1>
+            <p>Crafting sophisticated wear from the heart of our heritage.</p>
+            <button class="cta-btn">Shop Collection</button>
+        </div>
+    </section>
+
+    <section id="collection" class="reveal">
+        <div class="section-title">
+            <h2>Featured Styles</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="collection-grid">
+            <div class="product-card">
+                <img src="https://unsplash.com" alt="Product">
+                <div class="quick-view">Quick View</div>
+                <div class="product-info">
+                    <h3>Terracotta Muse Dress</h3>
+                    <p>₹3,499</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://unsplash.com" alt="Product">
+                <div class="quick-view">Quick View</div>
+                <div class="product-info">
+                    <h3>Dusty Rose Co-ord</h3>
+                    <p>₹4,200</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://unsplash.com" alt="Product">
+                <div class="quick-view">Quick View</div>
+                <div class="product-info">
+                    <h3>Organic Mushroom Tunic</h3>
+                    <p>₹2,850</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="reveal">
+        <div class="about-container">
+            <div class="about-image"></div>
+            <div class="about-text">
+                <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem; margin-bottom: 20px;">The Soul of Our Craft</h2>
+                <p>At Shyam Bastyralaya, we believe clothing is a narrative of tradition and modern grace. Every stitch in our Terracotta and Mushroom palette is inspired by organic textures and the warmth of the earth.</p>
+                <p style="margin-top: 15px;">Founded on the principles of quality and comfort, we curate pieces that make you feel grounded yet sophisticated.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="reveal">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="contact-flex">
+            <form>
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Your Message"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="brand-logo" style="margin-bottom: 20px; color: var(--mushroom-light);">Shyam Bastyralaya</div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+        </div>
+        <p>&copy; 2023 Shyam Bastyralaya Boutique. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Reveal on Scroll Logic
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+
+        // Smooth Scroll for Nav Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.height = '60px';
+                nav.style.background = 'rgba(229, 211, 197, 0.95)';
+            } else {
+                nav.style.height = '80px';
+                nav.style.background = 'var(--white-glass)';
+            }
+        });
+
+        // Initial check for elements in view
+        reveal();
+    </script>
+</body>
+</html>
